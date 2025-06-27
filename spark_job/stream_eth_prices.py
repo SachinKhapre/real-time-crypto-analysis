@@ -79,7 +79,7 @@ def write_to_postgres(batch_df, _):
     batch_df.write \
         .format("jdbc") \
         .option("url", f"jdbc:postgresql://{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}") \
-        .option("dbtable", "public.eth_prices") \
+        .option("dbtable", "public.crypto_prices") \
         .option("user", POSTGRES_USER) \
         .option("password", POSTGRES_PASSWORD) \
         .option("driver", "org.postgresql.Driver") \
