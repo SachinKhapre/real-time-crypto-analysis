@@ -1,17 +1,6 @@
-{{ config(materialized='table', alias='eth_price_5min_avg') }}
-
-WITH base AS (
-    SELECT
-        date_trunc('minute', ts) AS minute_bucket,
-        price
-    FROM {{ ref('stg_eth_prices') }}
-),
-grouped AS (
-    SELECT
-        minute_bucket,
-        avg(price) AS avg_price
-    FROM base
-    GROUP BY minute_bucket
-    ORDER BY minute_bucket
-)
-SELECT * FROM grouped
+SELECT
+  DATE_TRUNC('minute', ts) - INTERVAL '1 minute' * (EXTRACT(MINUTE FROM ts)::int % 5) AS window_start,
+  ROUND(AVG(price)::numeric, 4) AS avg_price
+FROM {{ ref('stg_eth_prices') }}
+GROUP BY window_start
+ORDER BY window_start DESC
