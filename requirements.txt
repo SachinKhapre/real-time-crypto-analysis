@@ -3,3 +3,7 @@ requests
 kafka-python
 pyarrow
 pyspark
+dagster
+dagster-dbt[postgres]
+dbt-core
+dbt-postgres
