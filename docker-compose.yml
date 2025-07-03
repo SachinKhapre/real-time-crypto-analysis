@@ -85,7 +85,7 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
     command: >
-      bash /opt/workspace/docker/spark-submit.sh
+      bash /opt/workspace/spark_job/spark-submit.sh
 
 volumes:
   postgres_data:
